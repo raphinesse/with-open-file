@@ -1,6 +1,7 @@
 import test from 'ava'
 import sinon from 'sinon'
 import rewire from 'rewire'
+import delay from 'delay'
 
 const TEST_FD = 42
 const TEST_RESULT = 'Callback result'
@@ -25,12 +26,27 @@ test('calls callback with temporary file descriptor', async t => {
   const { m, fsP, callback } = t.context
   callback.resolves(TEST_RESULT)
 
-  const result = await m(...TEST_ARGS, callback)
+  t.is(await m(...TEST_ARGS, callback), TEST_RESULT)
+
   t.true(fsP.open.calledOnceWithExactly(...TEST_ARGS))
   t.true(callback.calledOnceWithExactly(TEST_FD))
   t.true(fsP.close.calledOnceWithExactly(TEST_FD))
-  t.true(fsP.open.calledBefore(fsP.close))
-  t.is(result, TEST_RESULT)
+
+  t.true(fsP.open.calledBefore(callback))
+  t.true(fsP.close.calledAfter(callback))
+})
+
+test('calls async functions in order', async t => {
+  const { m, fsP, callback } = t.context
+  const onFsOpenResolve = sinon.spy()
+  const onCallbackResolve = sinon.spy()
+  fsP.open.callsFake(_ => delay(10).then(onFsOpenResolve))
+  callback.callsFake(_ => delay(10).then(onCallbackResolve))
+
+  await m(...TEST_ARGS, callback)
+
+  t.true(callback.calledAfter(onFsOpenResolve))
+  t.true(fsP.close.calledAfter(onCallbackResolve))
 })
 
 test('closes the file if callback rejects', async t => {
@@ -53,12 +69,14 @@ test('synchronously calls callback with temporary file descriptor', t => {
   const { m, fs, callback } = t.context
   callback.returns(TEST_RESULT)
 
-  const result = m.sync(...TEST_ARGS, callback)
+  t.is(m.sync(...TEST_ARGS, callback), TEST_RESULT)
+
   t.true(fs.openSync.calledOnceWithExactly(...TEST_ARGS))
   t.true(callback.calledOnceWithExactly(TEST_FD))
   t.true(fs.closeSync.calledOnceWithExactly(TEST_FD))
-  t.true(fs.openSync.calledBefore(fs.closeSync))
-  t.is(result, TEST_RESULT)
+
+  t.true(fs.openSync.calledBefore(callback))
+  t.true(fs.closeSync.calledAfter(callback))
 })
 
 test('synchronously closes the file if callback throws', t => {
