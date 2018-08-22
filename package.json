@@ -22,7 +22,7 @@
     "trailingComma": "es5"
   },
   "scripts": {
-    "test": "ava"
+    "test": "xo && ava"
   },
   "dependencies": {
     "p-finally": "^1.0.0",
@@ -32,7 +32,7 @@
     "ava": "^0.25.0",
     "rewire": "^4.0.1",
     "sinon": "^6.1.5",
-    "xo": "^0.22.0"
+    "xo": "^0.21.0"
   },
   "engines": {
     "node": ">=6"
