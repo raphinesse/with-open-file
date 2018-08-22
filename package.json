@@ -22,7 +22,7 @@
     "trailingComma": "es5"
   },
   "scripts": {
-    "test": "xo && ava"
+    "test": "ava"
   },
   "dependencies": {
     "p-finally": "^1.0.0",
