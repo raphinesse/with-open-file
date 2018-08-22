@@ -22,7 +22,7 @@
     "trailingComma": "es5"
   },
   "scripts": {
-    "test": "xo && ava"
+    "test": "xo && nyc ava"
   },
   "dependencies": {
     "p-finally": "^1.0.0",
@@ -30,6 +30,7 @@
   },
   "devDependencies": {
     "ava": "^0.25.0",
+    "nyc": "^12.0.2",
     "rewire": "^4.0.1",
     "sinon": "^6.1.5",
     "xo": "^0.21.0"
