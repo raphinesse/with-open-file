@@ -26,6 +26,7 @@
   },
   "dependencies": {
     "p-finally": "^1.0.0",
+    "p-try": "^2.0.0",
     "pify": "^3.0.0"
   },
   "devDependencies": {
