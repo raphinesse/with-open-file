@@ -37,6 +37,10 @@ Returns a `Promise` wrapping the result of calling `callback` with the requested
 
 Returns the result of calling `callback` with the requested file descriptor.
 
+#### ...openArgs
+
+Arguments as supported by [`fs.openSync`](https://nodejs.org/api/fs.html#fs_fs_opensync_path_flags_mode)
+
 #### callback
 
 Type: `function`
