@@ -1,6 +1,6 @@
 {
   "name": "with-open-file",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "description": "Do stuff with an open file, knowing it will finally be closed",
   "repository": "raphinesse/with-open-file",
   "license": "MIT",
