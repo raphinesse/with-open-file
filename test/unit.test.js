@@ -9,7 +9,7 @@ const TEST_ARGS = Object.freeze(['testPath', 'r'])
 class TestError extends Error {}
 
 test.beforeEach(t => {
-  const m = rewire('.')
+  const m = rewire('..')
   const fs = {
     openSync: sinon.stub().returns(TEST_FD),
     closeSync: sinon.spy(),
