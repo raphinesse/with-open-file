@@ -41,6 +41,8 @@
     "node": ">=6"
   },
   "keywords": [
+    "node",
+    "node.js",
     "close",
     "fd",
     "file",
