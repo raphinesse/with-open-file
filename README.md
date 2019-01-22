@@ -22,7 +22,7 @@ withOpenFile('foo.txt', 'r', fd => {
 })
 
 withOpenFile.sync('foo.txt', 'r', fd => {
-  // Process file using synchronously using fd
+  // Process file synchronously using fd
 })
 ```
 
