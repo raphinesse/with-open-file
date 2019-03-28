@@ -53,7 +53,7 @@ test('closes the file if callback rejects', async t => {
   const { m, fsP, callback } = t.context
   callback.rejects(new TestError())
 
-  await t.throws(m(...TEST_ARGS, callback), TestError)
+  await t.throwsAsync(m(...TEST_ARGS, callback), TestError)
   t.true(fsP.close.calledOnceWithExactly(TEST_FD))
 })
 
@@ -61,7 +61,7 @@ test('closes the file if callback throws', async t => {
   const { m, fsP, callback } = t.context
   callback.throws(new TestError())
 
-  await t.throws(m(...TEST_ARGS, callback), TestError)
+  await t.throwsAsync(m(...TEST_ARGS, callback), TestError)
   t.true(fsP.close.calledOnceWithExactly(TEST_FD))
 })
 
