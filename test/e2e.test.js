@@ -1,6 +1,6 @@
-import test from 'ava'
 import { read, readSync } from 'fs'
 import path from 'path'
+import test from 'ava'
 import pify from 'pify'
 import m from '..'
 
